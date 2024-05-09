@@ -1,25 +1,25 @@
 package br.com.alura.aluraschool.model.entity;
 
-import java.util.Date;
-
 import jakarta.persistence.*;
+import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 
-import jakarta.validation.constraints.Size;
-import lombok.Data;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "course")
 @Data
 public class Course {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "name")
     private String name;
-    
-    @Id
-    @Column(name = "code") /*O código de um curso deve ser textual, sem espaços, nem caracteres numéricos e nem
+
+    @Column(name = "code", unique = true, length = 10) /*O código de um curso deve ser textual, sem espaços, nem caracteres numéricos e nem
     caracteres especiais, mas pode ser separado por - , exemplo: spring-boot-avancado . */
-    @Size(max = 10)
     private String code; // (máximo de caracteres = 10)
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -28,19 +28,17 @@ public class Course {
             @JoinColumn(name = "email", referencedColumnName = "email")
     })
     private User instructor;
-    
+
     @Column(name = "description")
     private String description;
-    
+
     @Column(name = "status")
     private boolean status;
-    
-    @Column(name = "creation_date")
-    @CreatedDate
-    private Date creationDate;
-    
-    @Column(name = "end_date")
-    private Date endDate;
-    
 
+    @Column(name = "created_at")
+    @CreatedDate
+    private LocalDate createdAt;
+
+    @Column(name = "deactivated_at")
+    private LocalDate deactivatedAt;
 }

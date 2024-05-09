@@ -1,17 +1,11 @@
 package br.com.alura.aluraschool.model.entity;
 
-import java.util.Date;
-
+import br.com.alura.aluraschool.model.enums.RoleEnum;
+import jakarta.persistence.*;
+import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 
-import br.com.alura.aluraschool.model.enums.RoleEnum;
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import lombok.Data;
-import jakarta.persistence.Table;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "user_school")
@@ -22,16 +16,17 @@ public class User {
     @Column(name = "user_key")
     private UserKey userKey;
 
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "password")
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="role")
+    @Column(name = "role")
     private RoleEnum role;
 
-    @Column(name = "creation_date")
+    @Column(name = "created_at")
     @CreatedDate
-    private Date creationDate;
-
-
+    private LocalDate createdAt;
 }
