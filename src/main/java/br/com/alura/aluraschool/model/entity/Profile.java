@@ -31,8 +31,5 @@ public class Profile {
             this.profileId = profileId;
         }
 
-        public long getProfileId() {
-            return profileId;
-        }
     }
 }
