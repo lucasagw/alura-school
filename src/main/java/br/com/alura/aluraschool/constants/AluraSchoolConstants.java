@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 public interface AluraSchoolConstants {
 
     class EmailSend {
-        public static String subjects = "Feedback Unsatisfactoriness";
+
+        public static final String SUBJECTS = "Feedback Unsatisfactoriness";
     }
 }
