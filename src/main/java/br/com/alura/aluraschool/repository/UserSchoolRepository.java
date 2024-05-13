@@ -21,7 +21,14 @@ public interface UserSchoolRepository extends JpaRepository<UserSchool, UserKey>
     Optional<UserSchool> findByUsernameAndEmail(String username, String email);
 
 
-    @Query(value = "SELECT * FROM PUBLIC.USER_SCHOOL " +
+    @Query(value = "SELECT u.* FROM USER_SCHOOL u " +
+            "JOIN USER_PROFILE up ON u.USERNAME = up.USERNAME AND u.EMAIL = up.EMAIL " +
+            "JOIN PROFILE p ON up.PROFILE_ID = p.ID AND p.NAME = 'STUDENT' " +
+            "WHERE u.USERNAME = :username AND u.EMAIL = :email", nativeQuery = true)
+    UserSchool getStudentByUsernameAndEmail(String username, String email);
+
+
+    @Query(value = "SELECT * FROM USER_SCHOOL " +
             "WHERE USERNAME = :username OR EMAIL = :email", nativeQuery = true)
     Optional<UserSchool> customFindByUsernameOrEmail(String username, String email);
 
