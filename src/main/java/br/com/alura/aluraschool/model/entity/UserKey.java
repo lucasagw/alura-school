@@ -1,22 +1,28 @@
 package br.com.alura.aluraschool.model.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import lombok.Data;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.io.Serializable;
 
 @Embeddable
-@Data
+@Getter
+@ToString
 public class UserKey implements Serializable {
-    
-    @NotBlank
-    @Pattern(regexp = "^[a-z]+$", message = "O username deve conter apenas caracteres minúsculos e sem espaços")
+
+    @Column(name = "username", unique = true, length = 20)
     private String username;
 
-    @Email(message = "The format of the given email is incorrect!")
-    @NotBlank
+    @Column(name = "email", unique = true)
     private String email;
+
+    public UserKey() {
+    }
+
+    public UserKey(String username, String email) {
+        this.username = username;
+        this.email = email;
+    }
 }
