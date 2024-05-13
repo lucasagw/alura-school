@@ -10,6 +10,7 @@ public interface CourseFeedbackRepository extends JpaRepository<CourseFeedback, 
 
 
     @Query("SELECT cf FROM CourseFeedback cf " +
-            "WHERE cf.course.code IN :courseCodes")
-    List<CourseFeedback> listFeedbackByCode(String courseCodes);
+            "WHERE cf.course.id = :courseId")
+    List<CourseFeedback> listFeedbackByCourseId(Long courseId);
+
 }

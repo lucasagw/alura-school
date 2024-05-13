@@ -48,5 +48,6 @@ public class CourseFeedback {
         this.student = student;
         this.comment = comment;
         this.rating = rating;
+        this.createdAt = LocalDate.now();
     }
 }
