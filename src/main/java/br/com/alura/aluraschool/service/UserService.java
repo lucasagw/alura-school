@@ -68,6 +68,11 @@ public class UserService {
         return user;
     }
 
+    public UserSchool getStudentByUsernameAndEmail(String username, String email) {
+
+        return userRepository.getStudentByUsernameAndEmail(username, email);
+    }
+
     public void register(UserForm userForm) {
 
         boolean userExists = userRepository.existsByUsernameOrEmail(userForm.getUsername(), userForm.getEmail());
