@@ -1,14 +1,17 @@
 package br.com.alura.aluraschool.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "enrollment")
-@Data
+@Getter
+@ToString
 public class Enrollment {
 
     @Id
@@ -17,16 +20,19 @@ public class Enrollment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-            @JoinColumn(name = "username", referencedColumnName = "username"),
-            @JoinColumn(name = "email", referencedColumnName = "email")
+            @JoinColumn(name = "student_name", referencedColumnName = "username", nullable = false),
+            @JoinColumn(name = "student_email", referencedColumnName = "email", nullable = false)
     })
-    private User user;
+    @Setter
+    private UserSchool user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    @JoinColumn(name = "course_id", referencedColumnName = "id", nullable = false)
+    @Setter
     private Course course;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
     @CreatedDate
+    @Setter
     private LocalDate createdAt;
 }
