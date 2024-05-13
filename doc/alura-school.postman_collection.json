@@ -1,0 +1,379 @@
+{
+	"info": {
+		"_postman_id": "7babc465-d553-403e-8d19-9b2ea7dd2a0b",
+		"name": "alura-school",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14648549"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "getUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{acessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/aluraSchool/user/jacqoliveira",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"aluraSchool",
+								"user",
+								"jacqoliveira"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-account",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dayane Breu\",\r\n    \"username\": \"dayane\",\r\n    \"email\": \"dayane.breu@alura.com\",\r\n    \"role\": \"STUDENT\",\r\n    \"password\": \"alurabrasil\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/aluraSchool/user/create-account",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"aluraSchool",
+								"user",
+								"create-account"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"acessToken\", JSON.parse(responseBody).accessToken)\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/aluraSchool/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"aluraSchool",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "enrollment",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{acessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"courseCode\": \"FKKENUDXZJ\",\r\n    \"student\": {\r\n        \"username\": \"gabs\",\r\n        \"email\": \"gabriel.santos@alura.com\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/aluraSchool/enrollment/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"aluraSchool",
+								"enrollment",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "course",
+			"item": [
+				{
+					"name": "listCourses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/aluraSchool/course?status=true&page=0&pageSize=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"aluraSchool",
+								"course"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "true"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Java: consumindo API, gravando arquivos e lidando com erros\",\r\n    \"instructorUsername\": \"admin\",\r\n    \"instructorEmail\": \"admin@alura\",\r\n    \"description\": \"Aprenda a consumir uma API HTTP em Java. Entenda como receber e converter informações de uma API para objetos Java. Manipule dados no formato JSON. Utilize a biblioteca Gson para conversão de objetos Java em JSON e vice-versa. Faça uso das classes do pacote java.io para manipulação de arquivos.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/aluraSchool/course/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"aluraSchool",
+								"course",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disable",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"PIXUVPBFAZ\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/aluraSchool/course/disable",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"aluraSchool",
+								"course",
+								"disable"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "courseFeedback",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"courseCode\": \"FKKENUDXZJ\",\r\n    \"comment\": \"Esse curso é brilhante, parabéns aos envolvidos!!!\",\r\n    \"rating\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/aluraSchool/course-feedback/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"aluraSchool",
+								"course-feedback",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generate-report",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/aluraSchool/course-feedback/generate-report",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"aluraSchool",
+								"course-feedback",
+								"generate-report"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{acessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "acessToken",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
