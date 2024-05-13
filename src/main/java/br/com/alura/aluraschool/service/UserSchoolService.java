@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 @Service
-public class UserService {
+public class UserSchoolService {
 
     private final BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
 
