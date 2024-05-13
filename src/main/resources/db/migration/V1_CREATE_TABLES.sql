@@ -8,8 +8,8 @@ CREATE TABLE profile (
 -- Tabela 'user_school'
 CREATE TABLE user_school (
                              username VARCHAR(20) NOT NULL,
-                             email VARCHAR(255) NOT NULL,
-                             name VARCHAR(255) NOT NULL,
+                             email VARCHAR(100) NOT NULL,
+                             name VARCHAR(200) NOT NULL,
                              password VARCHAR(255) NOT NULL,
                              created_at DATE NOT NULL,
                              PRIMARY KEY (username, email)
@@ -18,7 +18,7 @@ CREATE TABLE user_school (
 -- Tabela 'user_school_role' (Relacionamento Many-to-Many entre user_school e role)
 CREATE TABLE user_school_profile (
                                   user_key_username VARCHAR(20) NOT NULL,
-                                  user_key_email VARCHAR(255) NOT NULL,
+                                  user_key_email VARCHAR(100) NOT NULL,
                                   profile_id BIGINT NOT NULL,
                                   PRIMARY KEY (user_key_username, user_key_email, role_id),
                                   FOREIGN KEY (user_key_username, user_key_email) REFERENCES user_school(username, email),
@@ -30,8 +30,8 @@ CREATE TABLE course (
                         id BIGINT NOT NULL AUTO_INCREMENT,
                         name VARCHAR(220) NOT NULL,
                         code VARCHAR(10) UNIQUE NOT NULL,
-                        instructor_name VARCHAR(20) NOT NULL,
-                        instructor_email VARCHAR(120) NOT NULL,
+                        instructor_name VARCHAR(200) NOT NULL,
+                        instructor_email VARCHAR(100) NOT NULL,
                         description VARCHAR(350) NOT NULL,
                         status BOOLEAN NOT NULL,
                         created_at DATE NOT NULL,
@@ -44,9 +44,9 @@ CREATE TABLE course (
 CREATE TABLE course_feedback (
                                  id BIGINT NOT NULL AUTO_INCREMENT,
                                  course_id BIGINT NOT NULL,
-                                 student_name VARCHAR(20) NOT NULL,
-                                 student_email VARCHAR(255) NOT NULL,
-                                 comment VARCHAR(255) NOT NULL,
+                                 student_name VARCHAR(200) NOT NULL,
+                                 student_email VARCHAR(100) NOT NULL,
+                                 comment VARCHAR(300) NOT NULL,
                                  rating INT NOT NULL,
                                  created_at DATE NOT NULL,
                                  PRIMARY KEY (id),
@@ -57,8 +57,8 @@ CREATE TABLE course_feedback (
 -- Tabela 'enrollment'
 CREATE TABLE enrollment (
                             id BIGINT NOT NULL AUTO_INCREMENT,
-                            student_name VARCHAR(20) NOT NULL,
-                            student_email VARCHAR(255) NOT NULL,
+                            student_name VARCHAR(200) NOT NULL,
+                            student_email VARCHAR(100) NOT NULL,
                             course_id BIGINT NOT NULL,
                             created_at DATE NOT NULL,
                             PRIMARY KEY (id),
