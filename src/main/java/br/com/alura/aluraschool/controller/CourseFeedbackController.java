@@ -11,10 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/course-feedback")
@@ -33,7 +30,8 @@ public class CourseFeedbackController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping("/generate-report")
+    @GetMapping("/generate-report")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<CourseNPSReport> generateReport() {
 
         return ResponseEntity.ok(courseFeedbackService.getNpsReport());
