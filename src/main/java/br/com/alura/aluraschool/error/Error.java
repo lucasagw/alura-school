@@ -18,7 +18,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 
 @Component
@@ -33,13 +32,12 @@ public class Error implements Serializable {
     public Map<String, Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
 
         Map<String, Object> errors = new HashMap<>();
-
-        String errorMessage = ex.getBindingResult().getFieldErrors().stream()
-                .map(FieldError::getDefaultMessage)
-                .collect(Collectors.joining(", "));
-
-        errors.put("error", errorMessage);
-        errors.put("code", HttpStatus.BAD_REQUEST.value());
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+            errors.put("code", HttpStatus.BAD_REQUEST.value());
+        });
         return errors;
     }
 
