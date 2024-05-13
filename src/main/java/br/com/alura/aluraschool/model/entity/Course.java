@@ -1,44 +1,60 @@
 package br.com.alura.aluraschool.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "course")
-@Data
+@Getter
+@ToString
 public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "code", unique = true, length = 10) /*O código de um curso deve ser textual, sem espaços, nem caracteres numéricos e nem
-    caracteres especiais, mas pode ser separado por - , exemplo: spring-boot-avancado . */
-    private String code; // (máximo de caracteres = 10)
+    @Column(name = "code", unique = true, nullable = false, length = 10)
+    @Setter
+    private String code;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-            @JoinColumn(name = "username", referencedColumnName = "username"),
-            @JoinColumn(name = "email", referencedColumnName = "email")
+            @JoinColumn(name = "instructor_username", referencedColumnName = "username", nullable = false),
+            @JoinColumn(name = "instructor_email", referencedColumnName = "email", nullable = false)
     })
-    private User instructor;
+    @Setter
+    private UserSchool instructor;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
+    @Setter
     private boolean status;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
     @CreatedDate
+    @Setter
     private LocalDate createdAt;
 
     @Column(name = "deactivated_at")
+    @Setter
     private LocalDate deactivatedAt;
+
+    public Course() {
+    }
+
+    public Course(String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.status = true;
+    }
 }
