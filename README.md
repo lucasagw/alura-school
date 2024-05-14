@@ -22,6 +22,10 @@ Projeto elaborado para solucionar [esse desafio](https://drive.google.com/file/d
 ```
 git clone https://github.com/lucasagw/alura-school.git
 ```
+- Executar o comando abaixo para criar o arquivo .jar da aplicação Spring Boot
+```
+mvn clean package -DskipTests
+```
 - Executar o comando abaixo para subir o container do MySQL e da aplicação Spring Boot
 ```
 docker-compose up
