@@ -1,9 +1,11 @@
 package br.com.alura.aluraschool.service;
 
 
+import br.com.alura.aluraschool.constants.AluraSchoolConstants;
 import br.com.alura.aluraschool.model.entity.Course;
 import br.com.alura.aluraschool.model.entity.Enrollment;
 import br.com.alura.aluraschool.model.entity.UserSchool;
+import br.com.alura.aluraschool.model.record.CourseMin;
 import br.com.alura.aluraschool.model.record.CreateEnrollmentRequest;
 import br.com.alura.aluraschool.repository.EnrollmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ public class EnrollmentService {
     private EnrollmentRepository enrollmentRepository;
 
     @Autowired
-    private UserService userService;
+    private UserSchoolService userService;
 
     @Autowired
     private CourseService courserService;
@@ -50,8 +52,9 @@ public class EnrollmentService {
         }
     }
 
-    public List<String> listCourseForNPS() {
+    public List<CourseMin> listCourseForNPS() {
 
-        return enrollmentRepository.listCourseForNPS();
+        return enrollmentRepository.listCourseForNPS(AluraSchoolConstants.FeedbackRating.NUMBER_OF_ENROLLMENTS);
     }
+
 }

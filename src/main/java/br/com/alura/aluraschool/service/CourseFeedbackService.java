@@ -18,8 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static br.com.alura.aluraschool.constants.AluraSchoolConstants.Utils.INITIAL_VALUE;
 
@@ -30,7 +28,7 @@ public class CourseFeedbackService {
     private CourseFeedbackRepository feedbackCourseRepository;
 
     @Autowired
-    private UserService userService;
+    private UserSchoolService userService;
 
     @Autowired
     private CourseService courserService;
@@ -51,11 +49,15 @@ public class CourseFeedbackService {
 
         if (courseFeedback.getId() != null && courseFeedback.getRating() < AluraSchoolConstants.FeedbackRating.DETRACTORS) {
 
-            String body = "The course " + course.getName() + " received a rating of "
-                    + courseFeedbackRequest.rating() + "\nwith the following comment: " + courseFeedbackRequest.comment();
-
-            EmailSenderService.send(course.getInstructor().getUserKey().getEmail(), AluraSchoolConstants.EmailSend.SUBJECTS, body);
+            sendCourseFeedbackEmail(courseFeedbackRequest, course);
         }
+    }
+
+    private static void sendCourseFeedbackEmail(CourseFeedbackRequest courseFeedbackRequest, Course course) {
+        String body = "The course " + course.getName() + " received a rating of "
+                + courseFeedbackRequest.rating() + "\nwith the following comment: " + courseFeedbackRequest.comment();
+
+        EmailSenderService.send(course.getInstructor().getUserKey().getEmail(), AluraSchoolConstants.EmailSend.SUBJECTS, body);
     }
 
     public CourseNPSReport getNpsReport() {
@@ -63,7 +65,7 @@ public class CourseFeedbackService {
         List<CourseMin> courses = enrollmentService.listCourseForNPS();
 
         List<FeedBackNPS> listOfFeedbackNPS = new ArrayList<>();
-        int promoter, detractor;
+
         for (CourseMin course : courses) {
 
             int promoter = 0, detractor = 0;
@@ -78,13 +80,21 @@ public class CourseFeedbackService {
                     detractor++;
                 }
             }
-
-            double nps = ((double) (promoter - detractor) / feedbacks.size()) * 100.0;
+            double totalFeedbacks = feedbacks.size();
+            double nps = calculateNPS(promoter, detractor, totalFeedbacks);
             int roundedNPS = (int) Math.round(nps);
 
             listOfFeedbackNPS.add(new FeedBackNPS(course.code(), course.name(), roundedNPS));
         }
         return new CourseNPSReport(listOfFeedbackNPS);
+    }
+
+    private double calculateNPS(int promoters, int detractors, double totalFeedbacks) {
+
+        if (totalFeedbacks == 0) {
+            return 0.0;
+        }
+        return ((promoters - detractors) / totalFeedbacks) * 100.0;
     }
 
 }

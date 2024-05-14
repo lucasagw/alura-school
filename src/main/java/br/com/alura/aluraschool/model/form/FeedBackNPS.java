@@ -5,13 +5,16 @@ import lombok.Getter;
 @Getter
 public class FeedBackNPS {
 
+    private String courseCode;
+
     private String courseName;
 
     private int netPromoterScore;
 
     private String assessment;
 
-    public FeedBackNPS(String courseName, int netPromoterScore) {
+    public FeedBackNPS(String courseCode, String courseName, int netPromoterScore) {
+        this.courseCode = courseCode;
         this.courseName = courseName;
         this.netPromoterScore = netPromoterScore;
         this.assessment = calculateAssessment(netPromoterScore);
