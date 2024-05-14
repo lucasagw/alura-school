@@ -36,11 +36,13 @@ docker-compose up
 ```
 - Acessar aplicação em `http://localhost:8081`.
 
+## API
+
+- Acessar o diretório 'doc' para visualizar a coleção de requisições da API no Postman.
+
 ## Diagrama de Entidade e Relacionamento (ER)
 
 ![Diagrama de Entidade e Relacionamento (ER)](https://i.ibb.co/hHDCNtX/aluraschool.png)
 
-## API
 
-- Acessar o diretório 'doc' para visualizar a coleção de requisições da API no Postman.
 
