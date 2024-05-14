@@ -21,7 +21,7 @@ public class CourseService {
     private CourseRepository courserRepository;
 
     @Autowired
-    private UserService userService;
+    private UserSchoolService userService;
 
 
     public void register(CourseForm courseForm) {

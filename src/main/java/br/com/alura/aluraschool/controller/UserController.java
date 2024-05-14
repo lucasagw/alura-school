@@ -2,7 +2,7 @@ package br.com.alura.aluraschool.controller;
 
 import br.com.alura.aluraschool.model.form.UserForm;
 import br.com.alura.aluraschool.model.record.UserWithProfile;
-import br.com.alura.aluraschool.service.UserService;
+import br.com.alura.aluraschool.service.UserSchoolService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserSchoolService userService;
 
     @GetMapping("/{username}")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
