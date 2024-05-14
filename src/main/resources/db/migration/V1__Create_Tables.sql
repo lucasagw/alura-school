@@ -1,12 +1,12 @@
 -- Tabela 'profile'
-CREATE TABLE profile (
+CREATE TABLE IF NOT EXISTS profile (
                       id BIGINT NOT NULL AUTO_INCREMENT,
                       name VARCHAR(255) NOT NULL,
                       PRIMARY KEY (id)
 );
 
 -- Tabela 'user_school'
-CREATE TABLE user_school (
+CREATE TABLE  IF NOT EXISTS user_school (
                              username VARCHAR(20) NOT NULL,
                              email VARCHAR(100) NOT NULL,
                              name VARCHAR(200) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE user_school (
 );
 
 -- Tabela 'user_school_role' (Relacionamento Many-to-Many entre user_school e role)
-CREATE TABLE user_school_profile (
+CREATE TABLE  IF NOT EXISTS user_school_profile (
                                   user_key_username VARCHAR(20) NOT NULL,
                                   user_key_email VARCHAR(100) NOT NULL,
                                   profile_id BIGINT NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE user_school_profile (
 );
 
 -- Tabela 'course'
-CREATE TABLE course (
+CREATE TABLE  IF NOT EXISTS course (
                         id BIGINT NOT NULL AUTO_INCREMENT,
                         name VARCHAR(220) NOT NULL,
                         code VARCHAR(10) UNIQUE NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE course (
 );
 
 -- Tabela 'course_feedback'
-CREATE TABLE course_feedback (
+CREATE TABLE  IF NOT EXISTS course_feedback (
                                  id BIGINT NOT NULL AUTO_INCREMENT,
                                  course_id BIGINT NOT NULL,
                                  student_name VARCHAR(200) NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE course_feedback (
 );
 
 -- Tabela 'enrollment'
-CREATE TABLE enrollment (
+CREATE TABLE  IF NOT EXISTS enrollment (
                             id BIGINT NOT NULL AUTO_INCREMENT,
                             student_name VARCHAR(200) NOT NULL,
                             student_email VARCHAR(100) NOT NULL,
