@@ -30,7 +30,7 @@ docker-compose up
 
 ## Arquitetura
 
-![Diagrama de Entidade e Relacionamento (ER)](<img src="https://i.ibb.co/hHDCNtX/aluraschool.png" alt="aluraschool" border="0">)
+![Diagrama de Entidade e Relacionamento (ER)](https://i.ibb.co/hHDCNtX/aluraschool.png)
 
 ## API
 
