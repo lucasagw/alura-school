@@ -22,15 +22,15 @@ Projeto elaborado para solucionar [esse desafio](https://drive.google.com/file/d
 ```
 git clone https://github.com/lucasagw/alura-school.git
 ```
-- Executar o comando abaixo para criar o arquivo .jar da aplicação Spring Boot
+- Executar o comando abaixo para criar o arquivo .jar da aplicação Spring Boot:
 ```
 mvn clean package -DskipTests
 ```
-- Navegar até o diretório docker
+- Navegar até o diretório docker:
 ```
 cd src/main/java/br/com/alura/aluraschool/docker
 ```
-- Executar o comando abaixo para subir o container do MySQL e da aplicação Spring Boot
+- Executar o comando abaixo para subir o container do MySQL e da aplicação Spring Boot:
 ```
 docker-compose up
 ```
