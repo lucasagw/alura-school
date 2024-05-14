@@ -68,15 +68,17 @@ public class CourseFeedbackService {
 
         for (CourseMin course : courses) {
 
-            int promoter = 0, detractor = 0;
+            int promoter = INITIAL_VALUE;
+            int detractor = INITIAL_VALUE;
 
             List<CourseFeedback> feedbacks = feedbackCourseRepository.listFeedbackByCourseId(course.id());
 
             for (CourseFeedback courseFeedback : feedbacks) {
-                if (courseFeedback.getRating() >= 9) {
+                int rating = courseFeedback.getRating();
+
+                if (rating >= AluraSchoolConstants.FeedbackRating.PROMOTERS) {
                     promoter++;
-                }
-                if (courseFeedback.getRating() <= 6) {
+                } else if (rating <= AluraSchoolConstants.FeedbackRating.DETRACTORS) {
                     detractor++;
                 }
             }
@@ -92,9 +94,9 @@ public class CourseFeedbackService {
     private double calculateNPS(int promoters, int detractors, double totalFeedbacks) {
 
         if (totalFeedbacks == 0) {
-            return 0.0;
+            throw new IllegalArgumentException("No feedbacks for this course");
         }
-        return ((promoters - detractors) / totalFeedbacks) * 100.0;
+        return ((promoters - detractors) / totalFeedbacks) * AluraSchoolConstants.Utils.PERCENTAGE;
     }
 
 }
