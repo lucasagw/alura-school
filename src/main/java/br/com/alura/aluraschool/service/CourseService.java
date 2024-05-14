@@ -66,6 +66,10 @@ public class CourseService {
 
         Course course = findByCode(code);
 
+        if (!course.isStatus()) {
+            throw new IllegalArgumentException("Course already disabled");
+        }
+
         course.setStatus(false);
         course.setDeactivatedAt(LocalDate.now());
 
