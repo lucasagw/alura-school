@@ -28,7 +28,7 @@ docker-compose up
 ```
 - Acessar aplicação em `http://localhost:8081`.
 
-## Arquitetura
+## Diagrama de Entidade e Relacionamento (ER)
 
 ![Diagrama de Entidade e Relacionamento (ER)](https://i.ibb.co/hHDCNtX/aluraschool.png)
 
