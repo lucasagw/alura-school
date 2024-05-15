@@ -42,7 +42,7 @@ docker-compose up
 
 ## Diagrama de Entidade e Relacionamento (ER)
 
-![Diagrama de Entidade e Relacionamento (ER)](https://i.ibb.co/1rDMP59/aluraschool.png)
+![Diagrama de Entidade e Relacionamento (ER)](https://i.ibb.co/jHkPPmG/aluraschool.png)
 
 
 
