@@ -11,7 +11,6 @@ Projeto elaborado para solucionar [esse desafio](https://drive.google.com/file/d
 ## Tecnologias
 
 - [Spring Boot](https://spring.io/projects/spring-boot)
-- [Spring MVC](https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/mvc.html)
 - [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
 - [Docker Compose](https://docs.docker.com/compose/)
 - [MySQL](https://www.mysql.com/)
