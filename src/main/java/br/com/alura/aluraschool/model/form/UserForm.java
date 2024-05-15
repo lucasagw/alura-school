@@ -26,7 +26,6 @@ public class UserForm {
     private String email;
 
     @SetPattern(regexp = "^(?i)(ADMIN|INSTRUCTOR|STUDENT)$")
-    @Size(min = 1, message = "At least one profile must be informed.")
     private Set<String> profiles;
 
     @NotBlank
