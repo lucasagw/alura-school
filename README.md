@@ -27,7 +27,7 @@ mvn clean package -DskipTests
 ```
 - Navegar até o diretório docker:
 ```
-cd src/main/java/br/com/alura/aluraschool/docker
+cd docker
 ```
 - Executar o comando abaixo para subir o container do MySQL e da aplicação Spring Boot:
 ```
