@@ -29,10 +29,10 @@ public class UserSchool {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_profile",
+            name = "user_school_profile",
             joinColumns = {
-                    @JoinColumn(name = "username", referencedColumnName = "username", nullable = false),
-                    @JoinColumn(name = "email", referencedColumnName = "email", nullable = false)
+                    @JoinColumn(name = "user_username", referencedColumnName = "username", nullable = false),
+                    @JoinColumn(name = "user_email", referencedColumnName = "email", nullable = false)
             },
             inverseJoinColumns = @JoinColumn(name = "profile_id", referencedColumnName = "id", nullable = false)
     )
