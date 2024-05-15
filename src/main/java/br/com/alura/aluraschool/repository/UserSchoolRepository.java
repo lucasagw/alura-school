@@ -22,7 +22,7 @@ public interface UserSchoolRepository extends JpaRepository<UserSchool, UserKey>
 
 
     @Query(value = "SELECT u.* FROM USER_SCHOOL u " +
-            "JOIN USER_SCHOOL_PROFILE up ON u.USERNAME = up.USERNAME AND u.EMAIL = up.EMAIL " +
+            "JOIN USER_SCHOOL_PROFILE up ON u.USERNAME = up.USER_USERNAME AND u.EMAIL = up.USER_EMAIL " +
             "JOIN PROFILE p ON up.PROFILE_ID = p.ID AND p.NAME = 'STUDENT' " +
             "WHERE u.USERNAME = :username AND u.EMAIL = :email", nativeQuery = true)
     UserSchool getStudentByUsernameAndEmail(String username, String email);
