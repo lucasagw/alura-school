@@ -20,7 +20,7 @@ public class Enrollment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-            @JoinColumn(name = "student_name", referencedColumnName = "username", nullable = false),
+            @JoinColumn(name = "student_username", referencedColumnName = "username", nullable = false),
             @JoinColumn(name = "student_email", referencedColumnName = "email", nullable = false)
     })
     @Setter
