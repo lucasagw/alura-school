@@ -8,5 +8,5 @@ CREATE TABLE  IF NOT EXISTS course_feedback (
                                  created_at DATE NOT NULL,
                                  PRIMARY KEY (id),
                                  FOREIGN KEY (course_id) REFERENCES course(id),
-                                 FOREIGN KEY (student_name, student_email) REFERENCES user_school(username, email)
+                                 FOREIGN KEY (student_username, student_email) REFERENCES user_school(username, email)
 );
