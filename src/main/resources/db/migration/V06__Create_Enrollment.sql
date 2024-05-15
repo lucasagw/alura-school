@@ -1,6 +1,6 @@
 CREATE TABLE  IF NOT EXISTS enrollment (
                             id BIGINT NOT NULL AUTO_INCREMENT,
-                            student_username VARCHAR(200) NOT NULL,
+                            student_username VARCHAR(20) NOT NULL,
                             student_email VARCHAR(100) NOT NULL,
                             course_id BIGINT NOT NULL,
                             created_at DATE NOT NULL,
