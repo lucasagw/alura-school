@@ -33,4 +33,4 @@ build/
 .vscode/
 /data/alura-school.trace.db
 /data/alura-school.mv.db
-/src/main/java/br/com/alura/aluraschool/docker/mysql/
+/docker/mysql/
