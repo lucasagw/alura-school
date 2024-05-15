@@ -1,10 +1,13 @@
 package br.com.alura.aluraschool.model.form;
 
+import br.com.alura.aluraschool.util.SetPattern;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+
+import java.util.Set;
 
 @Getter
 public class UserForm {
@@ -22,9 +25,9 @@ public class UserForm {
     @NotBlank
     private String email;
 
-    @Pattern(regexp = "^(?i)(ADMIN|INSTRUCTOR|STUDENT)$", message = "Invalid role. Allowed roles are ADMIN, INSTRUCTOR, STUDENT.")
-    @NotBlank
-    private String role;
+    @SetPattern(regexp = "^(?i)(ADMIN|INSTRUCTOR|STUDENT)$")
+    @Size(min = 1, message = "At least one profile must be informed.")
+    private Set<String> profiles;
 
     @NotBlank
     private String password;

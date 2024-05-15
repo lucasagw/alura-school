@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toSet;
 
 @Service
 public class UserSchoolService {
@@ -80,17 +83,25 @@ public class UserSchoolService {
         if (userExists) {
             throw new IllegalArgumentException("A user with the same email or username already exists.");
         }
-        var profile = profileRepository.findByName(userForm.getRole().toUpperCase());
+
+        Set<String> collectNames = getProfiles(userForm.getProfiles());
+
+        var profiles = profileRepository.findByNames(collectNames);
 
         var userKey = new UserKey(userForm.getUsername(), userForm.getEmail());
 
         var user = new UserSchool(userKey, userForm.getName(), bCrypt.encode(userForm.getPassword()));
 
-        user.setProfiles(Set.of(profile));
+        user.setProfiles(profiles);
 
         user.setCreatedAt(LocalDate.now());
 
         userRepository.save(user);
+    }
+
+    private static Set<String> getProfiles(Set<String> profiles) {
+
+        return profiles.stream().map(String::toUpperCase).collect(toSet());
     }
 
 }

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7babc465-d553-403e-8d19-9b2ea7dd2a0b",
+		"_postman_id": "107d9066-f41f-4d2f-acd2-93837c97f150",
 		"name": "alura-school",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "14648549"
@@ -50,7 +50,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Dayane Breu\",\r\n    \"username\": \"dayane\",\r\n    \"email\": \"dayane.breu@alura.com\",\r\n    \"role\": \"STUDENT\",\r\n    \"password\": \"alurabrasil\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Jacqueline Oliveira\",\r\n    \"username\": \"jacque\",\r\n    \"email\": \"jacqueline.oliveira@alura.com\",\r\n    \"profiles\": [\r\n        \"admin\",\r\n        \"instructor\"\r\n    ],\r\n    \"password\": \"alurabrasil\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
