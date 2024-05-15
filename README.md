@@ -14,6 +14,7 @@ Projeto elaborado para solucionar [esse desafio](https://drive.google.com/file/d
 - [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
 - [Docker Compose](https://docs.docker.com/compose/)
 - [MySQL](https://www.mysql.com/)
+- [Java 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
 
 ## Como Executar
 
