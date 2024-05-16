@@ -12,10 +12,10 @@ import java.util.List;
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
 
 
-    @Query("SELECT COUNT(enrollment) > 0 " +
-            "FROM Enrollment enrollment " +
-            "WHERE enrollment.user = :userSchool " +
-            "AND enrollment.course = :course")
+    @Query("SELECT COUNT(e) > 0 " +
+            "FROM Enrollment e " +
+            "WHERE e.user = :userSchool " +
+            "AND e.course = :course")
     boolean isUserEnrolled(UserSchool userSchool, Course course);
 
 
