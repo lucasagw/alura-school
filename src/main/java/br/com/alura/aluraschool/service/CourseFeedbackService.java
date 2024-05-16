@@ -94,21 +94,22 @@ public class CourseFeedbackService {
                     detractor++;
                 }
             }
-            double totalFeedbacks = feedbacks.size();
-            double nps = calculateNPS(promoter, detractor, totalFeedbacks);
-            int roundedNPS = (int) Math.round(nps);
+            int totalFeedbacks = feedbacks.size();
+            int nps = calculateNPS(promoter, detractor, totalFeedbacks);
 
-            listOfFeedbackNPS.add(new FeedBackNPS(course.code(), course.name(), roundedNPS));
+            listOfFeedbackNPS.add(new FeedBackNPS(course.code(), course.name(), nps));
         }
         return new CourseNPSReport(listOfFeedbackNPS);
     }
 
-    private double calculateNPS(int promoters, int detractors, double totalFeedbacks) {
+    private int calculateNPS(int promoters, int detractors, int totalFeedbacks) {
 
         if (totalFeedbacks == 0) {
             throw new IllegalArgumentException("No feedbacks for this course");
         }
-        return ((promoters - detractors) / totalFeedbacks) * AluraSchoolConstants.Utils.PERCENTAGE;
+        double nps = ((double) (promoters - detractors) / totalFeedbacks) * AluraSchoolConstants.Utils.PERCENTAGE;
+
+        return (int) Math.round(nps);
     }
 
 }
