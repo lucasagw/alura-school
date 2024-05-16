@@ -43,6 +43,8 @@ public class CourseFeedbackService {
         UserSchool student = userService.getStudentByUsernameAndEmail(userKey.username(), userKey.email());
         Course course = courserService.findByCode(courseFeedbackRequest.courseCode());
 
+        validateFeedback(student, course);
+
         CourseFeedback courseFeedback = new CourseFeedback(course, student, courseFeedbackRequest.comment(), courseFeedbackRequest.rating());
 
         courseFeedback = feedbackCourseRepository.saveAndFlush(courseFeedback);
@@ -53,7 +55,17 @@ public class CourseFeedbackService {
         }
     }
 
+    private void validateFeedback(UserSchool student, Course course) {
+
+        var feedbackResult = feedbackCourseRepository.existsByStudentAndCourseCode(student, course.getCode());
+
+        if (feedbackResult) {
+            throw new IllegalArgumentException("Feedback already registered for this course");
+        }
+    }
+
     private static void sendCourseFeedbackEmail(CourseFeedbackRequest courseFeedbackRequest, Course course) {
+
         String body = "The course " + course.getName() + " received a rating of "
                 + courseFeedbackRequest.rating() + "\nwith the following comment: " + courseFeedbackRequest.comment();
 
