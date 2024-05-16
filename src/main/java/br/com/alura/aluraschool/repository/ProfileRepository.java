@@ -3,7 +3,6 @@ package br.com.alura.aluraschool.repository;
 import br.com.alura.aluraschool.model.entity.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.Set;
 
