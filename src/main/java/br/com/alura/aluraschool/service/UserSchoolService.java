@@ -84,7 +84,7 @@ public class UserSchoolService {
             throw new IllegalArgumentException("A user with the same email or username already exists.");
         }
 
-        Set<String> collectNames = getProfiles(userForm.getProfiles());
+        Set<String> collectNames = convertProfiles(userForm.getProfiles());
 
         var profiles = profileRepository.findByNames(collectNames);
 
@@ -99,7 +99,7 @@ public class UserSchoolService {
         userRepository.save(user);
     }
 
-    private static Set<String> getProfiles(Set<String> profiles) {
+    private static Set<String> convertProfiles(Set<String> profiles) {
 
         return profiles.stream().map(String::toUpperCase).collect(toSet());
     }
