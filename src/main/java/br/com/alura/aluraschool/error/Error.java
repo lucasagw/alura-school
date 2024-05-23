@@ -58,7 +58,7 @@ public class Error implements Serializable {
     public Map<String, Object> handleValidationNoSuchElementException(NoSuchElementException ex) {
 
         Map<String, Object> errors = new HashMap<>();
-        errors.put("error", "Wasn't found: " + ex.getMessage());
+        errors.put("error", ex.getMessage());
         errors.put("code", HttpStatus.NOT_FOUND.value());
         return errors;
     }
@@ -118,7 +118,7 @@ public class Error implements Serializable {
     public Map<String, Object> handleIllegalStateException(IllegalStateException ex) {
 
         Map<String, Object> errors = new HashMap<>();
-        errors.put("error", "The endpoint failed: " + ex.getMessage());
+        errors.put("error", ex.getMessage());
         errors.put("code", HttpStatus.BAD_REQUEST.value());
         return errors;
     }
