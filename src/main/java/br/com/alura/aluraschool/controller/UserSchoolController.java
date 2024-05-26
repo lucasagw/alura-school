@@ -26,9 +26,7 @@ public class UserSchoolController {
     public ResponseEntity<UserWithProfile> getUser(@Pattern(regexp = "^[a-z]+$", message = "Username must consist only of lowercase letters, without numerals or spaces.")
                                                    @PathVariable String username) {
 
-        var user = userService.findByUsername(username);
-
-        return ResponseEntity.status(HttpStatus.OK).body(new UserWithProfile(user.getName(), user.getUserKey().getEmail(), user.getProfiles()));
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findByUsername(username));
     }
 
     @PostMapping("/create-account")

@@ -4,6 +4,7 @@ import br.com.alura.aluraschool.model.entity.Profile;
 import br.com.alura.aluraschool.model.entity.UserKey;
 import br.com.alura.aluraschool.model.entity.UserSchool;
 import br.com.alura.aluraschool.model.form.UserForm;
+import br.com.alura.aluraschool.model.record.UserWithProfile;
 import br.com.alura.aluraschool.repository.ProfileRepository;
 import br.com.alura.aluraschool.repository.UserSchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import java.util.Set;
-
-import static java.util.stream.Collectors.toSet;
+import java.util.stream.Collectors;
 
 @Service
 public class UserSchoolService {
@@ -28,16 +28,14 @@ public class UserSchoolService {
     private ProfileRepository profileRepository;
 
 
-    public UserSchool findById(UserKey userKey) {
+    public UserWithProfile findByUsername(String username) {
 
-        return userRepository.findById(userKey)
-                .orElseThrow(() -> new NoSuchElementException("User not found with userKey: " + userKey));
-    }
-
-    public UserSchool findByUsername(String username) {
-
-        return userRepository.findByUserKeyUsername(username)
+        var user = userRepository.findByUserKeyUsername(username)
                 .orElseThrow(() -> new NoSuchElementException("User not found with username: " + username));
+
+        Set<String> profiles = user.getProfiles().stream().map(Profile::getName).collect(Collectors.toSet());
+
+        return new UserWithProfile(user.getName(), user.getUserKey().getEmail(), profiles);
     }
 
     public UserSchool findByUsernameAndEmail(String username, String email) {
@@ -77,11 +75,7 @@ public class UserSchoolService {
 
     public void register(UserForm userForm) {
 
-        boolean userExists = userRepository.existsByUsernameOrEmail(userForm.getUsername(), userForm.getEmail());
-
-        if (userExists) {
-            throw new IllegalArgumentException("A user with the same email or username already exists.");
-        }
+        verifyUserNotDuplicate(userForm);
 
         Set<String> collectNames = convertProfiles(userForm.getProfiles());
 
@@ -98,9 +92,18 @@ public class UserSchoolService {
         userRepository.save(user);
     }
 
+    private void verifyUserNotDuplicate(UserForm userForm) {
+
+        boolean userExists = userRepository.existsByUsernameOrEmail(userForm.getUsername(), userForm.getEmail());
+
+        if (userExists) {
+            throw new IllegalArgumentException("A user with the same email or username already exists.");
+        }
+    }
+
     private static Set<String> convertProfiles(Set<String> profiles) {
 
-        return profiles.stream().map(String::toUpperCase).collect(toSet());
+        return profiles.stream().map(String::toUpperCase).collect(Collectors.toSet());
     }
 
 }
